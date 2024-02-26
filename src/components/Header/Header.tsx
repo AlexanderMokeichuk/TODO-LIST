@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   return (
     <header className={"bg-success position-fixed w-100 z-3"}>
       <div className={"container d-flex align-items-center justify-content-between"}>
-        <Link to={"/"} className={"nav-link"}>TODO</Link>
+        <Link to={"/"} className={"nav-link"}>Todo_List</Link>
         <NavBar/>
       </div>
     </header>
