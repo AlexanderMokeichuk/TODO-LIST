@@ -4,10 +4,10 @@ import Footer from "../components/Footer/Footer";
 
 const Layout: React.FC<React.PropsWithChildren> = ({children}) => {
   return (
-    <div className={"min-vh-100 d-flex flex-column"}>
+    <div className={"min-vh-100 d-flex flex-column bg-secondary"}>
       <Header/>
-      <main>
-        <div className={"container mt-3"}>
+      <main style={{marginTop:65}}>
+        <div className={"container h-100 overflow-y-auto"}>
           {children}
         </div>
       </main>

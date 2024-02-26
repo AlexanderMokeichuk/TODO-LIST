@@ -1,9 +1,10 @@
 import React, {FormEvent, useState} from "react";
-import {AppDispatch} from "../../app/store";
-import {useDispatch} from "react-redux";
+import {AppDispatch, RootState} from "../../app/store";
+import {useDispatch, useSelector} from "react-redux";
 import {addTask, fetchTask} from "../TodoList/TodoThunks";
 import {Task} from "../../type";
-import {useNavigate} from "react-router-dom";
+import BtnSpinner from "../../BtnSpinner/BtnSpinner";
+import {changeBtnLoading} from "../TodoList/TodoState";
 
 const defaultState: Task = {
   title: "",
@@ -11,7 +12,7 @@ const defaultState: Task = {
 };
 
 const AddNewTask: React.FC = () => {
-  const navigate = useNavigate();
+  const {btnLoading} = useSelector((state: RootState) => state.todoList);
   const [formState, setFormState] = useState<Task>(defaultState);
   const dispatch: AppDispatch = useDispatch();
 
@@ -22,11 +23,12 @@ const AddNewTask: React.FC = () => {
     }));
   };
   const addNewTask = async (e: FormEvent) => {
+    dispatch(changeBtnLoading());
     e.preventDefault();
     await dispatch(addTask({...formState}));
     setFormState(defaultState);
+    dispatch(changeBtnLoading());
     dispatch(fetchTask());
-    navigate("/");
   };
 
   return (
@@ -44,7 +46,13 @@ const AddNewTask: React.FC = () => {
             onChange={changeTitle}
           />
         </div>
-        <button type={"submit"} className={"btn btn-primary ms-auto"}>Add</button>
+        <button type={"submit"} className={"btn btn-primary ms-auto"} disabled={btnLoading}>
+          {
+            (btnLoading)
+            ? <BtnSpinner/>
+            : "Add"
+          }
+        </button>
       </form>
     </div>
   );

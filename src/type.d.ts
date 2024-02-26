@@ -11,6 +11,7 @@ export interface TaskInStore {
 export interface TaskState {
   tasks: TaskInStore[],
   loading: boolean,
+  buttonsLoading: boolean,
   error: boolean,
 }
 
