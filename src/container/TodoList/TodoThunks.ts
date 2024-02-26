@@ -28,3 +28,22 @@ export const addTask = createAsyncThunk<void, Task>(
     await axiosApi.post(".json", {...arg});
   }
 );
+
+export const putTaskApi = createAsyncThunk<void, TaskInStore>(
+  "todoList/putTask",
+  async (arg) => {
+    const task: Task = {
+      title: arg.title,
+      isActive: arg.isActive,
+    };
+    await axiosApi.put(`/${arg.id}.json`, task);
+  }
+);
+
+export const deleteTaskApi = createAsyncThunk<void, string>(
+  "todoList/delete",
+  async (arg) => {
+    await axiosApi.delete(`/${arg}.json`);
+    fetchTask();
+  }
+);

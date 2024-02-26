@@ -1,4 +1,4 @@
-import Layout from "./components/Layout/Layout";
+import Layout from "./Layout/Layout";
 import {Route, Routes} from "react-router-dom";
 import TodoList from "./container/TodoList/TodoList";
 import AddNewTask from "./container/AddNewTask/AddNewTask";

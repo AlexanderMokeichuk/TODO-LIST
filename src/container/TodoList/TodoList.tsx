@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "../../app/store";
 import {useEffect} from "react";
 import {fetchTask} from "./TodoThunks";
+import Spinner from "../../components/Spinner/Spinner";
+import TaskAlert from "../../components/TaskAlert/TaskAlert";
 
 const TodoList = () => {
   const {tasks, loading} = useSelector((state: RootState) => state.todoList);
@@ -13,13 +15,8 @@ const TodoList = () => {
 
   return (
     <div>
-      {(loading) ? "lof" : tasks.map((item) => {
-        return (
-          <div key={item.id} className={"alert alert-primary"}>
-            <div>{item.title}</div>
-            <input type={"checkbox"}/>
-          </div>
-        );
+      {(loading) ? <Spinner/> : tasks.map((item) => {
+        return <TaskAlert key={item.id} item={item}/>;
       })}
     </div>
   );

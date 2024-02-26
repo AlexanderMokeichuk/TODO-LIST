@@ -21,9 +21,9 @@ const AddNewTask: React.FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const addNewTask = (e: FormEvent) => {
+  const addNewTask = async (e: FormEvent) => {
     e.preventDefault();
-    dispatch(addTask({...formState}));
+    await dispatch(addTask({...formState}));
     setFormState(defaultState);
     dispatch(fetchTask());
     navigate("/");
